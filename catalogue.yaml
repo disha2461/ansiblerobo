@@ -36,5 +36,15 @@
     ansible.builtin.file:
       path: /app
       state: directory
-    
+  
+  - name: download catalogue artifact
+    ansiblr.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      dest: /app
+
+  - name: extract catalogue artifact
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+      remote_src: yes
     
