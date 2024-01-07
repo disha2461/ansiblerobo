@@ -9,6 +9,7 @@
     ansible.builtin.yum:
       name: nodejs
       state: installed
+      disable_gpg_check: true
 
   - name: check roboshop user exist or not
     ansible.builtin.command: id roboshop
@@ -25,8 +26,14 @@
     ansible.builtin.stat:
       path: /app
     register: directory
-    
+
   - name: print the directory stats
     ansible.builtin.debug:
       msg: "output: {{directory}}"
+
+  - when: directory.stat.exists == False
+    name: create /app directory
+    ansible.builtin.file:
+      path: /app
+      state: directory
     
