@@ -51,7 +51,7 @@
   - name: install dependencies
     ansible.builtin.command: npm install
       args:
-        chdir: /app
+       chdir: /app
 
   - name: copy catalogue service
     ansible.builtin.service:
@@ -73,7 +73,7 @@
       state: installed
   - name: load catalogue data
     ansible.builtin.command: mongo --host 172.31.20.134 < /app/schema/catalogue.js
-    
+
   - name: restart catalogue
     ansible.builtin.service:
       name: catalogue
